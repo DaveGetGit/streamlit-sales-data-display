@@ -22,5 +22,30 @@ def get_data():
     return data
 
 
+@st.experimental_fragment
+def show_daily_sales(data):
+    time.sleep(1)
+    selected_date = st.date_input("Pick a date", value=date(2023, 1, 1), min_value=date(
+        2023, 1, 1), max_value=date(2023, 12, 31), key="selected_date")
+    if "previous_date" not in st.session_state:
+        st.session_state.previous_date = selected_date
+    previous_date = st.session_state.previous_date
+    st.session_state.previous_date = selected_date
+    is_new_month = selected_date.replace(
+        day=1) != previous_date.replace(day=1)
+    if is_new_month:
+        st.rerun()
+    st.header(f"Best sellers, {selected_date:%B %d,%Y}")
+    top_ten = data.loc[selected_date].sort_values(ascending=False)[0:10]
+    cols = st.columns([5, 10])
+    cols[0].dataframe(top_ten)
+    cols[1].bar_chart(top_ten)
+    st.header(f"Worst sellers, {selected_date:%B %d,%Y}")
+    bottom_ten = data.loc[selected_date].sort_values()[0:10]
+    cols = st.columns([5, 10])
+    cols[0].dataframe(bottom_ten)
+    cols[1].bar_chart(bottom_ten)
+
+
 data = get_data()
-data
+show_daily_sales(data)
