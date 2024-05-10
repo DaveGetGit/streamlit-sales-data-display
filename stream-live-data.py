@@ -58,7 +58,7 @@ st.sidebar.button("Stop streaming",
 RUN_EVERY = None
 
 
-@st.experimental_fragment(run_every=RUN_EVERY)
+@st.experimental_fragment(RUN_EVERY=RUN_EVERY)
 def show_latest_data():
     """
     Show the latest data in a line chart, updating according to the RUN_EVERY parameter.
