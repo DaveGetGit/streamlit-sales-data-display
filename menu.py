@@ -5,6 +5,12 @@ def authenticated_menu():
     # Show a navigation menu for authenticated users
     st.sidebar.page_link("app.py", label="Switch accounts")
     st.sidebar.page_link("pages/user.py", label="Your profile")
+    st.sidebar.page_link("pages/llm_model.py", label="LLM Model")
+    st.sidebar.page_link("pages/sales_dashboard.py", label="Sales Dashboard")
+    st.sidebar.page_link("pages/stream-live-data.py", label="Stream Live Data")
+    st.sidebar.page_link("pages/cats.py", label="Cat Herding")
+    st.sidebar.page_link("pages/shakespeare_query.py",
+                         label="[BigQuery]Shakespeare Query")
     if st.session_state.role in ["admin", "super-admin"]:
         st.sidebar.page_link("pages/admin.py", label="Manage users")
         st.sidebar.page_link(

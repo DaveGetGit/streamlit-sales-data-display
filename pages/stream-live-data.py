@@ -58,13 +58,12 @@ st.sidebar.button("Stop streaming",
 RUN_EVERY = None
 
 
-@st.experimental_fragment(RUN_EVERY=RUN_EVERY)
+@st.experimental_fragment()
 def show_latest_data():
     """
     Show the latest data in a line chart, updating according to the RUN_EVERY parameter.
     """
     last_timestamp = st.session_state.data.index[-1]
-    print(f"Last timestamp: {last_timestamp}")
     st.session_state.data = pd.concat(
         [st.session_state.data, get_recent_data(last_timestamp)])
     st.session_state.data = st.session_state.data[-100:]
